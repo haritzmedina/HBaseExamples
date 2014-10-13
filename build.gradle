@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    lombokVersion = '1.14.8'
+    logbackVersion = '1.1.2'
+    slf4jVersion = '1.7.7'
+    junitVersion = '4.11'
+    mockitoVersion = '1.9.5'
+}
+
+dependencies {
+    compile('org.apache.hbase:hbase-client:0.99.0'){
+        exclude module: "slf4j-log4j12"
+    }
+    // logging
+    compile("ch.qos.logback:logback-classic:$logbackVersion")
+    compile("ch.qos.logback:logback-core:$logbackVersion")
+    compile("org.slf4j:slf4j-api:$slf4jVersion")
+    compile("org.projectlombok:lombok:$lombokVersion")
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile("org.mockito:mockito-all:$mockitoVersion")
+}
